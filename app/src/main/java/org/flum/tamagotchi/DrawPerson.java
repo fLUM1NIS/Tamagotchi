@@ -21,12 +21,13 @@ public class DrawPerson extends View {
     int color_grey = Color.GRAY;
 
     private Sprite player;
+    private Sprite player1;
     private int viewWidth;
     private int viewHeight;
     private int points = 0;
     private final int timerInterval = 480;
     private int velocityY;
-    private int y;
+    private int y, x;
 
 
     private int scoreMore = 0; //240
@@ -43,6 +44,11 @@ public class DrawPerson extends View {
         super.onDraw(canvas);
         canvas.drawARGB(250, 127, 199, 255); // цвет фона
         player.draw(canvas);
+
+        y = getWidth() / 2;
+        x = getHeight() / 3 * 2;
+
+
     }
 
     protected void update () {
@@ -54,16 +60,24 @@ public class DrawPerson extends View {
 
         super(context);
 
+        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.kitchen);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
 
         int w = b.getWidth()/4;
         int h = b.getHeight()/4;
 
+        int w1 = b.getWidth()*4;
+        int h1 = b.getHeight()*4;
+
+
         Rect firstFrame = new Rect(0, 0, w, h);
 
         //if ()
 
-        player = new Sprite(10, y, 0, 0, firstFrame, b);
+        player1 = new Sprite(100, 100, 0, 0, firstFrame, b1);
+        player = new Sprite(100, 100, 0, 0, firstFrame, b);
+
+        System.out.println(y +"   " + x);
 
         Timer t = new Timer();
         t.start();
@@ -87,10 +101,11 @@ public class DrawPerson extends View {
                 if (i == 0 && j == 0) {
                     continue;
                 }
-//                if (j == 1 || j == 2 || j == 3 || j ==4) {
-//                    continue;
-//                }
+                if (j == 1 || j == 2 || j == 3 || j ==4) {
+                    continue;
+                }
                 player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
+                player1.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
             }
         }
     }

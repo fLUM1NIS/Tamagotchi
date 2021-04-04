@@ -34,6 +34,7 @@ import android.widget.TextView;
 
         public class MainActivity extends AppCompatActivity {
 
+
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -89,6 +90,9 @@ import android.widget.TextView;
                         case 2:
                             Tab3 tab3 = new Tab3();
                             return tab3;
+                        case 3:
+                            Tab4 tab4 = new Tab4();
+                            return tab4;
                         default:
                             return null;
                     }
@@ -103,11 +107,13 @@ import android.widget.TextView;
 
                     switch (position) {
                         case 0:
-                            return "SELECTION 1";
+                            return "Kitchen";
                         case 1:
-                            return "SELECTION 2";
+                            return "Bedroom";
                         case 2:
-                            return "SELECTION 3";
+                            return "Livingroom";
+                        case 3:
+                            return "Bathroom";
                     }
                     return null;
                 }
@@ -115,7 +121,7 @@ import android.widget.TextView;
                 @Override
                 public int getCount() {
                     // Show 3 total pages.
-                    return 3;
+                    return 4;
                 }
             }
 
