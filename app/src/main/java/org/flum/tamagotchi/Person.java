@@ -15,6 +15,12 @@ import java.util.List;
 public class Person extends AppCompatActivity {
 
      private float health, drink, eat, toilet, bored, sleep;
+     public static int status;
+
+    public static int getStatus() {
+        return status;
+    }
+
 
 
     public void Start() {
@@ -59,6 +65,13 @@ public class Person extends AppCompatActivity {
             //интересная игра
             bored += 60;
         }
+    }
+
+    public int CheckStatus() {
+        if (health < 50 || drink < 50 || eat < 50 || toilet > 50 || bored > 50 || sleep < 50) {
+            status = 3; // (normal)
+        }
+        return status;
     }
 
     public void GoToToilet() {

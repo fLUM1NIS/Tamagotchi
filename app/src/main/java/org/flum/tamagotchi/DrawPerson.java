@@ -9,10 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.CountDownTimer;
 import android.view.View;
-
-import org.flum.tamagotchi.ui.main.Sprite;
-
-import java.util.Timer;
+import android.webkit.WebView;
 
 public class DrawPerson extends View {
 
@@ -27,71 +24,155 @@ public class DrawPerson extends View {
     private int viewWidth;
     private int viewHeight;
     private int points = 0;
-    private final int timerInterval = 30;
+    private final int timerInterval = 480;
+    private int velocityY;
+    private int y;
 
+
+    private int scoreMore = 0; //240
+
+    Person person = new Person();
 
     //example to create new color
     // int myTransparentBlue = Color.argb(127, 0, 0, 255);
 
 
-    @Override
+
+
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.drawARGB(250, 127, 199, 255); // цвет фона
+        player.draw(canvas);
+    }
 
-        Paint paint = new Paint();
-
-        paint.setSubpixelText(true);
-        paint.setAntiAlias(true);
-
-        paint.setColor(color_green);
-        canvas.drawPaint(paint);
-
+    protected void update () {
+        player.update(timerInterval);
+        invalidate();
     }
 
     public DrawPerson(Context context) {
+
         super(context);
+
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
-        int w = b.getWidth() / 4;
-        int h = b.getHeight() / 4;
+
+        int w = b.getWidth()/4;
+        int h = b.getHeight()/4;
+
         Rect firstFrame = new Rect(0, 0, w, h);
-        player = new Sprite(10, 0, 0, 100, firstFrame, b);
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+
+        //if ()
+
+        player = new Sprite(10, y, 0, 0, firstFrame, b);
+
+        Timer t = new Timer();
+        t.start();
+
+        // // //
+        // // //
+
+        if (scoreMore == 4) {
+            for (int i = 0; i < 100; i++) {
+                y+=5;
+            }
+        }
+        if (scoreMore == 1) {
+            for (int i = 0; i < 100; i++) {
+                y-=5;
+            }
+        }
+
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+//                if (j == 1 || j == 2 || j == 3 || j ==4) {
+//                    continue;
+//                }
                 player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
             }
         }
-        Timer t = new Timer();
-        t.start();
     }
-
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        viewWidth = w;
-        viewHeight = h;
-    }
-
-    protected void update() {
-        player.update(timerInterval);
-    }
-
-    @Override
-    public void invalidate() {
-        super.invalidate();
-    }
-
 
     class Timer extends CountDownTimer {
+
         public Timer() {
-            super(Integer.MAX_VALUE, 30);
+            super(Integer.MAX_VALUE, timerInterval);
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
             update();
+            scoreMore++;
         }
 
         @Override
         public void onFinish() {
+            //savData();
         }
     }
+
+
+
+//    @Override
+//    protected void onDraw(Canvas canvas) {
+//        super.onDraw(canvas);
+//
+//        Paint paint = new Paint();
+//
+//        paint.setSubpixelText(true);
+//        paint.setAntiAlias(true);
+//
+//        paint.setColor(color_green);
+//        canvas.drawPaint(paint);
+//
+//    }
+//
+//    public DrawPerson(Context context) {
+//        super(context);
+//        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
+//        int w = b.getWidth() / 4;
+//        int h = b.getHeight() / 4;
+//        Rect firstFrame = new Rect(0, 0, w, h);
+//        player = new Sprite(10, 0, 0, 100, firstFrame, b);
+//        for (int i = 0; i < 5; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
+//            }
+//        }
+//        Timer t = new Timer();
+//        t.start();
+//    }
+//
+//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+//        super.onSizeChanged(w, h, oldw, oldh);
+//        viewWidth = w;
+//        viewHeight = h;
+//    }
+//
+//    protected void update() {
+//        player.update(timerInterval);
+//    }
+//
+//    @Override
+//    public void invalidate() {
+//        super.invalidate();
+//    }
+//
+//
+//    class Timer extends CountDownTimer {
+//        public Timer() {
+//            super(Integer.MAX_VALUE, 30);
+//        }
+//
+//        @Override
+//        public void onTick(long millisUntilFinished) {
+//            update();
+//        }
+//
+//        @Override
+//        public void onFinish() {
+//        }
+//    }
 }
