@@ -44,6 +44,7 @@ public class DrawPerson extends View {
         super.onDraw(canvas);
         canvas.drawARGB(250, 127, 199, 255); // цвет фона
         player.draw(canvas);
+        player1.draw(canvas);
 
         y = getWidth() / 2;
         x = getHeight() / 3 * 2;
@@ -60,8 +61,9 @@ public class DrawPerson extends View {
 
         super(context);
 
-        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.kitchen);
+
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
+        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.kitchen);
 
         int w = b.getWidth()/4;
         int h = b.getHeight()/4;
@@ -105,7 +107,7 @@ public class DrawPerson extends View {
                     continue;
                 }
                 player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
-                player1.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
+                player1.addFrame(new Rect(j * w1, i * h1, j * w1 + w1, i * w1 + w1));
             }
         }
     }
