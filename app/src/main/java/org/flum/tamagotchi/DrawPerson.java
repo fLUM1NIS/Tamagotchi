@@ -44,7 +44,7 @@ public class DrawPerson extends View {
         super.onDraw(canvas);
         canvas.drawARGB(250, 127, 199, 255); // цвет фона
         player.draw(canvas);
-        player1.draw(canvas);
+//        player1.draw(canvas);
 
         y = getWidth() / 2;
         x = getHeight() / 3 * 2;
@@ -63,20 +63,20 @@ public class DrawPerson extends View {
 
 
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
-        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.kitchen);
+//        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.kitchen);
 
         int w = b.getWidth()/4;
         int h = b.getHeight()/4;
 
-        int w1 = b.getWidth()*4;
-        int h1 = b.getHeight()*4;
+//        int w1 = b.getWidth()*4;
+//        int h1 = b.getHeight()*4;
 
 
         Rect firstFrame = new Rect(0, 0, w, h);
 
         //if ()
 
-        player1 = new Sprite(100, 100, 0, 0, firstFrame, b1);
+//        player1 = new Sprite(100, 100, 0, 0, firstFrame, b1);
         player = new Sprite(100, 100, 0, 0, firstFrame, b);
 
         System.out.println(y +"   " + x);
@@ -103,11 +103,11 @@ public class DrawPerson extends View {
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                if (j == 1 || j == 2 || j == 3 || j ==4) {
-                    continue;
-                }
+//                if (j == 1 || j == 2 || j == 3 || j ==4) {
+//                    continue;
+//                }
                 player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
-                player1.addFrame(new Rect(j * w1, i * h1, j * w1 + w1, i * w1 + w1));
+//                player1.addFrame(new Rect(j * w1, i * h1, j * w1 + w1, i * w1 + w1));
             }
         }
     }
