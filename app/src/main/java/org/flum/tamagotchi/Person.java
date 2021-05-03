@@ -1,27 +1,44 @@
 package org.flum.tamagotchi;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Rect;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 
 public class Person extends AppCompatActivity {
 
-     private float health, drink, eat, toilet, bored, sleep;
+//    MainActivity mainActivity = new MainActivity();
+
+     public static int health, drink, eat, toilet, bored, sleep, shower;
      public static int status;
+
+     TextView indicators;
+
+     SharedPreferences sharedPreferences;
+
+     public String NAME_HEALTH = "SAVED_HEALTH";
+     public String NAME_DRINK = "SAVED_DRINK";
+     public String NAME_EAT = "SAVED_EAT";
+     public String NAME_TOILET = "SAVED_TOILET";
+     public String NAME_BORED = "SAVED_BORED";
+     public String NAME_SLEEP = "SAVED_SLEEP";
+     public String NAME_SHOWER = "SAVED_SHOWER";
+
+
 
     public static int getStatus() {
         return status;
     }
 
-
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Start();
+    }
 
     public void Start() {
         //рандомизация начальных показателей
@@ -34,6 +51,7 @@ public class Person extends AppCompatActivity {
             toilet = 0;
             bored = 0;
             sleep = 100;
+            shower = 0;
         } else {
             //плохое начало
             health = 67;
@@ -42,6 +60,7 @@ public class Person extends AppCompatActivity {
             toilet = 13;
             bored = 60;
             sleep = 70;
+            shower = 20;
         }
     }
 
@@ -68,20 +87,20 @@ public class Person extends AppCompatActivity {
     }
 
     public int CheckStatus() {
-        if (health < 50 || drink < 50 || eat < 50 || toilet > 50 || bored > 50 || sleep < 50) {
+        if (health > 50 && drink > 50 && eat > 50 && toilet < 50 && bored < 50 && sleep > 50 && shower < 50) {
             status = 3; // (normal)
         }
         return status;
     }
 
     public void GoToToilet() {
-        toilet -= (toilet - Math.random() * 12);
+        toilet -= (toilet - Math.random() * 60);
     }
 
     public void CheckDead() {
         //проверка показателей
         //если хоть 1 критический - проигрышь
-        if (health == 0 || drink == 0 || eat == 0 || toilet == 100 || bored == 100 || sleep == 0) {
+        if (health < 0 || drink < 0 || eat < 0 || toilet > 100 || bored > 100 || sleep < 0 || shower > 100) {
             Dead();
         }
     }
@@ -94,6 +113,22 @@ public class Person extends AppCompatActivity {
     public void update () {
 
     }
+
+    void saveData() {
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(NAME_HEALTH, getHealth());
+        editor.commit();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveData();
+    }
+
+
 
     class Timer extends CountDownTimer  {
 
@@ -116,5 +151,63 @@ public class Person extends AppCompatActivity {
         }
     }
 
+    public int getHealth() {
+        return health;
+    }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getDrink() {
+        return drink;
+    }
+
+    public void setDrink(int drink) {
+        this.drink = drink;
+    }
+
+    public int getEat() {
+        return eat;
+    }
+
+    public void setEat(int eat) {
+        this.eat = eat;
+    }
+
+    public int getToilet() {
+        return toilet;
+    }
+
+    public void setToilet(int toilet) {
+        this.toilet = toilet;
+    }
+
+    public int getBored() {
+        return bored;
+    }
+
+    public void setBored(int bored) {
+        this.bored = bored;
+    }
+
+    public int getSleep() {
+        return sleep;
+    }
+
+    public void setSleep(int sleep) {
+        this.sleep = sleep;
+    }
+
+    public int getShower() {
+        return shower;
+    }
+
+    public void setShower(int shower) {
+        this.shower = shower;
+    }
+
+    public static void setStatus(int status) {
+        Person.status = status;
+    }
 }

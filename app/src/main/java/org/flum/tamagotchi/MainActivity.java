@@ -1,6 +1,11 @@
 package org.flum.tamagotchi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,12 +33,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 //import kotlinx.coroutines.scheduling.NanoTimeSource;
 
         public class MainActivity extends AppCompatActivity {
 
+            Person person = new Person();
+            public static TextView indicators;
+            EditText editText;
 
             @Override
             protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +78,14 @@ import android.widget.TextView;
                         .setAction("Action", null).show();
                     }
                 });
+
+                person.Start();
+
+                indicators = (TextView) findViewById(R.id.indicators);
+
+
+
+                //editText.setText("Health: " + Person.health);
 
             }
 

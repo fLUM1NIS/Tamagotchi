@@ -7,20 +7,44 @@
     android:layout_height="match_parent"
 
     >
+
     <!-- ! tools:context -->
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Tab 1"
+    <fragment
+        android:id="@+id/person_view"
+        android:name="org.flum.tamagotchi.PersonView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout="@layout/person_view" />
+
+    <fragment
+        android:id="@+id/other_view"
+        android:name="org.flum.tamagotchi.BgView$View1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/bg_view_1" />
+
+    <!--
+    <fragment
+        android:id="@+id/indicators_view"
+        android:name="org.flum.tamagotchi.IndicatorsView"
+        android:layout_width="322dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/indicators_view" />
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
