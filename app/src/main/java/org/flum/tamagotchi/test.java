@@ -18,8 +18,15 @@ public class test extends View {
 
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
-        canvas.scale(100, 100);
+        canvas.scale(300, 200);
 
-        canvas.drawText("fevc", 0, 0, paint);
+        canvas.drawText("1010", 0, 0, paint);
+        canvas.drawColor(Color.BLUE);
+        paint.setStyle(Paint.Style.STROKE);
+        //paint.setTextScaleX(30);
+        canvas.drawLine(0, 0, 100, 100, paint);
+        canvas.drawCircle(100, 100, 50000, paint);
+        canvas.drawText("HELLO MEN", 10, 10, paint);
+
     }
 }

@@ -14,20 +14,9 @@ public class Person extends AppCompatActivity {
 //    MainActivity mainActivity = new MainActivity();
 
      public static int health, drink, eat, toilet, bored, sleep, shower;
-     public static int status;
+     public static int status; // 1 - good; 2 - normal; 3 - bad; 4 - awful; 5 - dead;
 
      TextView indicators;
-
-     SharedPreferences sharedPreferences;
-
-     public String NAME_HEALTH = "SAVED_HEALTH";
-     public String NAME_DRINK = "SAVED_DRINK";
-     public String NAME_EAT = "SAVED_EAT";
-     public String NAME_TOILET = "SAVED_TOILET";
-     public String NAME_BORED = "SAVED_BORED";
-     public String NAME_SLEEP = "SAVED_SLEEP";
-     public String NAME_SHOWER = "SAVED_SHOWER";
-
 
 
     public static int getStatus() {
@@ -86,12 +75,12 @@ public class Person extends AppCompatActivity {
         }
     }
 
-    public int CheckStatus() {
-        if (health > 50 && drink > 50 && eat > 50 && toilet < 50 && bored < 50 && sleep > 50 && shower < 50) {
-            status = 3; // (normal)
-        }
-        return status;
-    }
+//    public int CheckStatus() {
+//        if (health > 50 && drink > 50 && eat > 50 && toilet < 50 && bored < 50 && sleep > 50 && shower < 50) {
+//            //status = 3; // (normal)
+//        }
+//        return status;
+//    }
 
     public void GoToToilet() {
         toilet -= (toilet - Math.random() * 60);
@@ -114,19 +103,6 @@ public class Person extends AppCompatActivity {
 
     }
 
-    void saveData() {
-        sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(NAME_HEALTH, getHealth());
-        editor.commit();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        saveData();
-    }
 
 
 

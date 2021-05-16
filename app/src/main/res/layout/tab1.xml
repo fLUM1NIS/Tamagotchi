@@ -33,6 +33,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/bg_view_1" />
 
+    <fragment
+        android:id="@+id/indicators_view"
+        android:name="org.flum.tamagotchi.IndicatorsView"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/indicators_view" />
+
     <!--
     <fragment
         android:id="@+id/indicators_view"

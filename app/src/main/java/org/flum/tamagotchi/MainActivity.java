@@ -2,17 +2,12 @@ package org.flum.tamagotchi;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.arch.core.util.Function;
@@ -21,37 +16,44 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
+import static org.flum.tamagotchi.Person.bored;
+import static org.flum.tamagotchi.Person.drink;
+import static org.flum.tamagotchi.Person.eat;
+import static org.flum.tamagotchi.Person.health;
+import static org.flum.tamagotchi.Person.shower;
+import static org.flum.tamagotchi.Person.sleep;
+import static org.flum.tamagotchi.Person.status;
+import static org.flum.tamagotchi.Person.toilet;
 
 //import kotlinx.coroutines.scheduling.NanoTimeSource;
 
         public class MainActivity extends AppCompatActivity {
 
             Person person = new Person();
-            public static TextView indicators;
+            public TextView indicators;
             EditText editText;
+
+            SharedPreferences sharedPreferences;
+            View view;
+
+            public String NAME_HEALTH = "SAVED_HEALTH";
+            public String NAME_DRINK = "SAVED_DRINK";
+            public String NAME_EAT = "SAVED_EAT";
+            public String NAME_TOILET = "SAVED_TOILET";
+            public String NAME_BORED = "SAVED_BORED";
+            public String NAME_SLEEP = "SAVED_SLEEP";
+            public String NAME_SHOWER = "SAVED_SHOWER";
 
             @Override
             protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +67,7 @@ import java.util.function.Predicate;
                 tabs.setupWithViewPager(viewPager);
                 FloatingActionButton fab = findViewById(R.id.fab);
 
-
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//                getWindow().setFlags(Window.FEATURE_NO_TITLE, Window.FEATURE_NO_TITLE);
-
 
                 fab.setOnClickListener(new View.OnClickListener() {
 
@@ -79,18 +78,77 @@ import java.util.function.Predicate;
                     }
                 });
 
+                //IndicatorsView indicatorFragment = getFragmentManager().findFragmentById(R.id.indicators_view);
+                //indicators = indicatorFragment.getView().findViewById(R.id.ind);
+                //indicatorFragment.getView().findViewById(R.id.ind);
+                //indicators.setText("erererer");
+
+
+
+                //indicators = findViewById(R.id.ind);
+
+                String stHea = Integer.toString(health);
+//                indicators.setText("");
+
                 person.Start();
-
-                indicators = (TextView) findViewById(R.id.indicators);
-
-
-
-                //editText.setText("Health: " + Person.health);
 
             }
 
-            public static class SectionsPagerAdapter extends FragmentPagerAdapter {
+            @Override
+            protected void onStop() {
+                super.onStop();
+                saveData();
+            }
 
+            @Override
+            protected void onResume() {
+                super.onResume();
+                loadData();
+                if (health < 1) {
+                    person.Start();
+                }
+
+                status = 2;
+                System.out.println("Status: " + status);
+            }
+
+            void saveData() {
+                sharedPreferences = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(NAME_HEALTH, health);
+                editor.putInt(NAME_DRINK, drink);
+                editor.putInt(NAME_EAT, eat);
+                editor.putInt(NAME_TOILET, toilet);
+                editor.putInt(NAME_BORED, bored);
+                editor.putInt(NAME_SLEEP, sleep);
+                editor.putInt(NAME_SHOWER, shower);
+                editor.commit();
+
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            }
+
+            void loadData() {
+                sharedPreferences = getPreferences(MODE_PRIVATE);
+                int savedHealth = sharedPreferences.getInt(NAME_HEALTH, -1);
+                int savedDrink = sharedPreferences.getInt(NAME_DRINK, -1);
+                int savedEat = sharedPreferences.getInt(NAME_EAT, -1);
+                int savedToilet = sharedPreferences.getInt(NAME_TOILET, -1);
+                int savedBored = sharedPreferences.getInt(NAME_BORED, -1);
+                int savedSleep = sharedPreferences.getInt(NAME_SLEEP, -1);
+                int savedShower = sharedPreferences.getInt(NAME_SHOWER, -1);
+
+                health = savedHealth;
+                drink = savedDrink;
+                eat = savedEat;
+                toilet = savedToilet;
+                bored = savedBored;
+                sleep = savedSleep;
+                shower = savedShower;
+
+                Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
+            }
+
+            public static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
                 @StringRes
                 private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
@@ -108,17 +166,21 @@ import java.util.function.Predicate;
 
                     switch (position) {
                         case 0:
-                            Tab1 tab1 = new Tab1();
-                            return tab1;
+//                            Tab1 tab1 = new Tab1();
+//                            return tab1;
+                            return new Tab1();
                         case 1:
-                            Tab2 tab2 = new Tab2();
-                            return tab2;
+//                            Tab2 tab2 = new Tab2();
+//                            return tab2;
+                            return new Tab2();
                         case 2:
-                            Tab3 tab3 = new Tab3();
-                            return tab3;
+//                            Tab3 tab3 = new Tab3();
+//                            return tab3;
+                            return new Tab3();
                         case 3:
-                            Tab4 tab4 = new Tab4();
-                            return tab4;
+//                            Tab4 tab4 = new Tab4();
+//                            return tab4;
+                            return new Tab4();
                         default:
                             return null;
                     }
