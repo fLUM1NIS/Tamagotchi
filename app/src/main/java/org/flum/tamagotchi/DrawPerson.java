@@ -46,7 +46,6 @@ public class DrawPerson extends View {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.WHITE);
         player.draw(canvas);
 
         Paint paint = new Paint();

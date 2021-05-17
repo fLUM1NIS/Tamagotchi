@@ -3,4 +3,32 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+    <string name="upHealth">Health</string>
+    <string name="downHealth">health</string>
+    <string name="upDrink">Drink</string>
+    <string name="downDrink">drink</string>
+    <string name="upEat">Eat</string>
+    <string name="downEat">eat</string>
+    <string name="upToilet">Toilet</string>
+    <string name="downToilet">toilet</string>
+    <string name="upBored">Bored</string>
+    <string name="downBored">bored</string>
+    <string name="upSleep">Sleep</string>
+    <string name="downSleep">sleep</string>
+    <string name="upShower">Shower</string>
+    <string name="downShower">shower</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="livingroom">Livingroom</string>
+    <string name="bathroom">Bathroom</string>
+
+<!--  Tabs name, button name.
+
+  steam for animation
+  translate
+  start activity
+  all methods work
+  mini-game
+
+  -->
 </resources>

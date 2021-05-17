@@ -31,34 +31,34 @@ public class Person extends AppCompatActivity {
 
     public void Start() {
         //рандомизация начальных показателей
-        int rds = (int) Math.random() * 3;
-        if (rds > 2) {
+        double rds = Math.random() * 1;
+        if (rds > 0.3) {
             //хорошее начало
-            health = 100;
-            drink = 100;
-            eat = 100;
-            toilet = 0;
-            bored = 0;
-            sleep = 100;
-            shower = 0;
+            health = (int) (Math.random() * 30 + 70);
+            drink = (int) (Math.random() * 30 + 70);
+            eat = (int) (Math.random() * 30 + 70);
+            toilet = (int) (Math.random() * 15);
+            bored = (int) (Math.random() * 15);
+            sleep = (int) (Math.random() * 30 + 70);
+            shower = (int) (Math.random() * 15);
         } else {
             //плохое начало
-            health = 67;
-            drink = 86;
-            eat = 89;
-            toilet = 13;
-            bored = 60;
-            sleep = 70;
-            shower = 20;
+            health = (int) (Math.random() * 50 + 20);
+            drink = (int) (Math.random() * 50 + 20);
+            eat = (int) (Math.random() * 50 + 20);
+            toilet = (int) (Math.random() * 15 + 15);
+            bored = (int) (Math.random() * 15 + 15);
+            sleep = (int) (Math.random() * 50 + 20);
+            shower = (int) (Math.random() * 15 + 15);
         }
     }
 
     public void Eat() {
-        eat += 40;
+        eat += (int) (Math.random() * 25 + 35);
     }
 
     public void Drink() {
-        drink += 60;
+        drink += (int) (Math.random() * 55 + 20);
     }
 
     public void play() {
@@ -89,7 +89,7 @@ public class Person extends AppCompatActivity {
     public void CheckDead() {
         //проверка показателей
         //если хоть 1 критический - проигрышь
-        if (health < 0 || drink < 0 || eat < 0 || toilet > 100 || bored > 100 || sleep < 0 || shower > 100) {
+        if (health < 1 || drink < 1 || eat < 1 || toilet > 100 || bored > 100 || sleep < 1 || shower > 100) {
             Dead();
         }
     }

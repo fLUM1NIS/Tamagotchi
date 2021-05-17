@@ -27,18 +27,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout="@layout/bg_view_3" />
 
     <fragment
         android:id="@+id/indicators_view"
         android:name="org.flum.tamagotchi.IndicatorsView"
         android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077"
         tools:layout="@layout/indicators_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
