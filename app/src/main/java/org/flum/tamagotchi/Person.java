@@ -6,12 +6,18 @@ import android.os.CountDownTimer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Person extends AppCompatActivity {
 
 //    MainActivity mainActivity = new MainActivity();
+
+    IndicatorsView indicatorsView = new IndicatorsView();
+
+    public static int HMWater;
+    public static int UMEat;
 
      public static int health, drink, eat, toilet, bored, sleep, shower;
      public static int status; // 1 - good; 2 - normal; 3 - bad; 4 - awful; 5 - dead;
@@ -37,10 +43,10 @@ public class Person extends AppCompatActivity {
             health = (int) (Math.random() * 30 + 70);
             drink = (int) (Math.random() * 30 + 70);
             eat = (int) (Math.random() * 30 + 70);
-            toilet = (int) (Math.random() * 15);
-            bored = (int) (Math.random() * 15);
+            toilet = (int) (Math.random() * 10 + 5);
+            bored = (int) (Math.random() * 10 + 5);
             sleep = (int) (Math.random() * 30 + 70);
-            shower = (int) (Math.random() * 15);
+            shower = (int) (Math.random() * 10 + 5);
         } else {
             //плохое начало
             health = (int) (Math.random() * 50 + 20);
@@ -51,17 +57,18 @@ public class Person extends AppCompatActivity {
             sleep = (int) (Math.random() * 50 + 20);
             shower = (int) (Math.random() * 15 + 15);
         }
+        StartActivity.isItFirstStart = true;
     }
 
-    public void Eat() {
+    public static void Eat() {
         eat += (int) (Math.random() * 25 + 35);
     }
 
-    public void Drink() {
+    public static void Drink() {
         drink += (int) (Math.random() * 55 + 20);
     }
 
-    public void play() {
+    public static void play() {
         //поиграть в игру
         //для уменьшения скуки или добычи ресурсов
         // // //ПОТОМ расчёт повышения интереса от времяни игры
@@ -82,11 +89,11 @@ public class Person extends AppCompatActivity {
 //        return status;
 //    }
 
-    public void GoToToilet() {
+    public static void GoToToilet() {
         toilet -= (toilet - Math.random() * 60);
     }
 
-    public void CheckDead() {
+    public static void CheckDead() {
         //проверка показателей
         //если хоть 1 критический - проигрышь
         if (health < 1 || drink < 1 || eat < 1 || toilet > 100 || bored > 100 || sleep < 1 || shower > 100) {
@@ -94,9 +101,9 @@ public class Person extends AppCompatActivity {
         }
     }
 
-    public void Dead() {
-        Toast deadToast = Toast.makeText(getApplicationContext(), "dd", Toast.LENGTH_LONG);
-        deadToast.show();
+    public static void Dead() {
+        //Toast deadToast = Toast.makeText(getApplicationContext(), "dd", Toast.LENGTH_LONG);
+        //deadToast.show();
     }
 
     public void update () {

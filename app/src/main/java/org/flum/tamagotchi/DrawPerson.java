@@ -7,12 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class DrawPerson extends View {
 
@@ -23,16 +19,21 @@ public class DrawPerson extends View {
     int color_yellow = Color.YELLOW;
     int color_grey = Color.GRAY;
 
-    private Sprite player;
-    private Sprite player1;
-    private int viewWidth;
-    private int viewHeight;
+    private Sprite playerGood;
+    private Sprite playerNormal;
+    private Sprite playerBad;
+    private Sprite playerAwful;
+    private Sprite playerDead;
     private int points = 0;
     private final int timerInterval = 480;
     private int velocityY;
     private int y, x;
 
-    Bitmap b;
+    Bitmap bGood;
+    Bitmap bNormal;
+    Bitmap bBad;
+    Bitmap bAwful;
+    Bitmap bDead;
     Rect firstFrame;
 
     public int c = 0;
@@ -46,7 +47,7 @@ public class DrawPerson extends View {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        player.draw(canvas);
+        playerGood.draw(canvas);
 
         Paint paint = new Paint();
 
@@ -55,7 +56,7 @@ public class DrawPerson extends View {
     }
 
     protected void update() {
-        player.update(timerInterval);
+        playerGood.update(timerInterval);
         invalidate();
     }
 
@@ -63,14 +64,32 @@ public class DrawPerson extends View {
 
         super(context);
 
-        b = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
+        bGood = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
+        bNormal = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_person);
 
-        int w = b.getWidth()/4;
-        int h = b.getHeight()/4;
+        int wGood = bGood.getWidth()/4;
+        int hGood = bGood.getHeight()/ 4;
 
-        firstFrame = new Rect(0, 0, w, h);
+        int wNormal = bNormal.getWidth()/4;
+        int hNormal = bNormal.getHeight()/ 4;
 
-        player = new Sprite(0, 0, 0, 0, firstFrame, b);
+//        int wBad = bBad.getWidth()/4;
+//        int hBad = bBad.getHeight();
+//
+//        int wAwful = bAwful.getWidth()/4;
+//        int hAwful = bAwful.getHeight();
+//
+//        int wDead = bDead.getWidth();
+//        int hDead = bDead.getHeight();
+
+        firstFrame = new Rect(0, 0, wGood, hGood);
+
+        playerGood = new Sprite(0, 0, 0, 0, firstFrame, bGood);
+        playerNormal = new Sprite(0, 0, 0, 0, firstFrame, bNormal);
+        playerBad = new Sprite(0, 0, 0, 0, firstFrame, bBad);
+        playerAwful = new Sprite(0, 0, 0, 0, firstFrame, bAwful);
+        playerDead = new Sprite(0, 0, 0, 0, firstFrame, bDead);
+
 
         Timer t = new Timer();
         t.start();
@@ -90,10 +109,25 @@ public class DrawPerson extends View {
 //                if (j == 1 || j == 2 || j == 3 || j ==4) {
 //                    continue;
 //                }
-                    player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
+                    playerGood.addFrame(new Rect(j * wGood, i * hGood, j * wGood + wGood, i * wGood + wGood));
+                    invalidate();
                 }
             }
         }
+
+//        if (Person.status == 1) {
+//            for (int j = 0; j < 5; j++) {
+//                // playerGood.addFrame(new Rect(wGood, i * hGood, wGood + wGood, i * wGood + wGood));
+//                if (j == 0) continue;
+//                playerGood.addFrame(new Rect(j * wGood, hGood, j * wGood + wGood, wGood + wGood));
+//            }
+//        }
+//
+//        if (Person.status == 2) {
+//            for (int j = 0; j < 5; j++) {
+//                playerNormal.addFrame(new Rect(j * wNormal, hNormal, j * wNormal + wNormal, wNormal + wNormal));
+//            }
+//        }
 
         if (Person.status == 2) {
             for (int i = 0; i < 2 && i != 1; i++) {
@@ -104,10 +138,13 @@ public class DrawPerson extends View {
 //                if (j == 1 || j == 2 || j == 3 || j ==4) {
 //                    continue;
 //                }
-                    player.addFrame(new Rect(j * w, i * h, j * w + w, i * w + w));
+                    playerNormal.addFrame(new Rect(j * wNormal, i * hNormal, j * wNormal + wNormal, i * wNormal + wNormal));
+                    invalidate();
                 }
             }
         }
+
+
 
         invalidate();
     }

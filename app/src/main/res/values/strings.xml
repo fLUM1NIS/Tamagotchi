@@ -21,8 +21,17 @@
     <string name="bedroom">Bedroom</string>
     <string name="livingroom">Livingroom</string>
     <string name="bathroom">Bathroom</string>
+    <string name="doSleep">Sleep</string>
+    <string name="doDrink">Drink</string>
+    <string name="doEat">Eat</string>
+    <string name="doRest">Rest</string>
+    <string name="oFun">Fun</string>
+    <string name="doPlay">Play</string>
+    <string name="doToilet">Toilet</string>
+    <string name="doBath">Bath</string>
 
-<!--  Tabs name, button name.
+
+    <!--  Tabs name, button name.
 
   steam for animation
   translate

@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Тамагочи</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="upHealth">Здоровье</string>
+    <string name="downHealth">здоровье</string>
+    <string name="upDrink">Вода</string>
+    <string name="downDrink">вода</string>
+    <string name="upEat">Еда</string>
+    <string name="downEat">еда</string>
+    <string name="upToilet">Нужда</string>
+    <string name="downToilet">нужда</string>
+    <string name="upBored">Скука</string>
+    <string name="downBored">скука</string>
+    <string name="upSleep">Сон</string>
+    <string name="downSleep">сон</string>
+    <string name="upShower">Душ</string>
+    <string name="downShower">душ</string>
+    <string name="kitchen">Кухня</string>
+    <string name="bedroom">Спальня</string>
+    <string name="livingroom">Зал</string>
+    <string name="bathroom">Ванна</string>
+    <string name="doSleep">Поспать</string>
+    <string name="doDrink">Попить</string>
+    <string name="doEat">Поесть</string>
+    <string name="doRest">Отдыхать</string>
+    <string name="oFun">Веселиться</string>
+    <string name="doPlay">Играть</string>
+    <string name="doToilet">Сходить"\n"в туалет</string>
+    <string name="doBath">Помыться</string>
+
+
+    
+<!--  Tabs name, button name.
+
+  steam for animation
+  translate
+  start activity
+  all methods work
+  mini-game
+
+  -->
+</resources>

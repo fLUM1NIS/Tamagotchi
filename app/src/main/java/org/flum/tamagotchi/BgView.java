@@ -1,11 +1,13 @@
 package org.flum.tamagotchi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,11 +16,20 @@ import androidx.fragment.app.Fragment;
 
 public class BgView extends View {
 
+    public static Intent intentToMiniGame;
+
+    public static IndicatorsView indicatorsView = new IndicatorsView();
+
     public BgView(Context context) {
         super(context);
     }
 
+
     public static class View1 extends Fragment {
+
+        public static void Drink_F () {
+            Person.Drink();
+        }
 
         @Nullable
         @Override
@@ -31,6 +42,10 @@ public class BgView extends View {
             button_drink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Person.Drink();
+                    System.out.println("Drink: " + Person.drink);
+                    //TextView indD = view.findViewById(R.id.indDrink);
+                    //indD.setText(Person.drink);
                     Toast.makeText(getActivity(), "Drink", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -42,6 +57,7 @@ public class BgView extends View {
             });
             return view;
         }
+
     }
 
     public static class View2 extends Fragment {
@@ -89,6 +105,10 @@ public class BgView extends View {
             button_play.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    intentToMiniGame = new Intent(view.getContext(), MiniGame.class);
+                    startActivity(intentToMiniGame);
+
                     Toast.makeText(getActivity(), "Play", Toast.LENGTH_SHORT).show();
                 }
             });
