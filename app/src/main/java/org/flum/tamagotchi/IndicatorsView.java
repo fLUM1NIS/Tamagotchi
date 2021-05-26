@@ -50,7 +50,10 @@ public class IndicatorsView extends Fragment {
 //        indBar.setProgress(Person.);
 
         nickName = view.findViewById(R.id.nickName);
-        nickName.setText(StartActivity.enterName.getText().toString());
+        //nickName.setText(StartActivity.enterName.getText().toString());
+        if (nickName == null) {
+            nickName.setText(MainActivity.nick);
+        }
 
         indHealth = view.findViewById(R.id.indHealth);
         indHealthInt = view.findViewById(R.id.indHealthInt);
@@ -100,6 +103,8 @@ public class IndicatorsView extends Fragment {
         indShower.setText(R.string.upShower);
         indShowerInt.setText(String.valueOf(Person.shower));
         indShowerBar.setProgress(Person.shower);
+
+        //timer.start();
 
         return view;
         //return new test(getContext());

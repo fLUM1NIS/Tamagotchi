@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     public String NAME_HM_WATER = "SAVED_WATER";
     public String NAME_HM_EAT = "SAVED_EAT";
 
+    public static String nick;
+
+    EditText enterNick;
 
     Person person = new Person();
     public TextView indicators;
@@ -78,27 +81,6 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        indicatorsView.timer.start();
-
-
-//        android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        fragmentTransaction.add(R.id.indicators_view, indicatorsView);
-//        fragmentTransaction.commit();
-
-
-//        FragmentManager fm = getFragmentManager();
-//        Fragment fragment = fm.findFragmentByTag( MagazineViewFragment.TAG);
-//        if (fragment == null) {
-//            MagazineViewFragment fragment = new MagazineViewFragment();
-//            fragment.openStream(itemSelected);
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .add(R.id.container, fragment, MagazineViewFragment.TAG)
-//                    .commit();
-//        }
-
 
 
 //        ProgressBar indDrinkBar = indicatorsView.getActivity().findViewById(R.id.indDrinkBar); //  fragment.getView().findViewById(R.id.indDrinkBar);
@@ -128,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
 //        indShowerBar.setProgress(Person.shower);
 //        indShowerInt.setText(String.valueOf(Person.shower));
 
+        enterNick = findViewById(R.id.EnterNickName);
+        nick = enterNick.getText().toString();
+
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -137,19 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        FragmentManager fragmentManager = (FragmentManager) getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.add(R.id.indicators_view, indicatorsView);
-//        fragmentTransaction.commit();
-//
-//        if (indicatorsView == null) {
-//            indicatorsView = new IndicatorsView();
-//        }
-//
-//        TextView nickNameF = fragment.getView().findViewById(R.id.nickName);
-//        nickName = nickNameF.getText().toString();
-
-        CheckStatus();
+        //CheckStatus();
 
         person.Start();
 
@@ -189,10 +162,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt(NAME_SHOWER, shower);
         editor.putInt(NAME_HM_WATER, Person.HMWater);
         editor.putInt(NAME_HM_EAT, Person.HMEat);
-        //editor.putString(NAME_NICK, nickName);
+        editor.putString(NAME_NICK, nick);
         editor.commit();
-
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void loadData() {
@@ -207,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         int savedHMWater = sharedPreferences.getInt(NAME_HM_WATER, 5);
         int savedHMEat = sharedPreferences.getInt(NAME_HM_EAT, 5);
 
-        //String savedNick = sharedPreferences.getString(NAME_NICK, "");
+        String savedNick = sharedPreferences.getString(NAME_NICK, "");
 
         health = savedHealth;
         drink = savedDrink;
@@ -218,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
         shower = savedShower;
         Person.HMWater = savedHMWater;
         Person.HMEat = savedHMEat;
-
-        Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
+        nick = savedNick;
     }
 
     public static class SectionsPagerAdapter extends FragmentPagerAdapter {

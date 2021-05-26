@@ -181,10 +181,10 @@ Activity activity2 = (Activity) getContext();
     public boolean onTouchEvent(MotionEvent event) {
         int eventActivation = event.getAction();
         if (eventActivation == MotionEvent.ACTION_DOWN) {
-            if (event.getX() < player.getBoundingBoxRect().left && player.getX() < 1080 - 216) {
+            if (event.getX() < player.getBoundingBoxRect().right && player.getX() < 1080 - 216) {
                 player.setX(player.getX()+216);
             }
-            else if (event.getY() > player.getBoundingBoxRect().right  && player.getX() > 216) {
+            else if (event.getY() > player.getBoundingBoxRect().left  && player.getX() > 216) {
                 player.setX(player.getX() - 216);
             }
         }
