@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 
 public class BgView extends View {
 
@@ -27,8 +30,33 @@ public class BgView extends View {
 
     public static class View1 extends Fragment {
 
-        public static void Drink_F () {
-            Person.Drink();
+        public void updateInd() {
+            ProgressBar indDrinkBar = Objects.requireNonNull(getActivity()).findViewById(R.id.indDrinkBar);
+            TextView indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
+            indDrinkBar.setProgress(Person.drink);
+            indDrinkInt.setText(String.valueOf(Person.drink));
+            ProgressBar indEatBar = getActivity().findViewById(R.id.indEatBar);
+            TextView indEatInt = getActivity().findViewById(R.id.indEatInt);
+            indEatBar.setProgress(Person.eat);
+            indEatInt.setText(String.valueOf(Person.eat));
+            ProgressBar indSleepBar = getActivity().findViewById(R.id.indSleepBar);
+            TextView indSleepInt = getActivity().findViewById(R.id.indSleepInt);
+            indSleepBar.setProgress(Person.sleep);
+            indSleepInt.setText(String.valueOf(Person.sleep));
+            indSleepBar.setProgress(Person.sleep);
+            indSleepInt.setText(String.valueOf(Person.sleep));
+            ProgressBar indBoredBar = getActivity().findViewById(R.id.indBoredBar);
+            TextView indBoredInt = getActivity().findViewById(R.id.indBoredInt);
+            indBoredBar.setProgress(Person.bored);
+            indBoredInt.setText(String.valueOf(Person.bored));
+            ProgressBar indToiletBar = getActivity().findViewById(R.id.indToiletBar);
+            TextView indToiletInt = getActivity().findViewById(R.id.indToiletInt);
+            indToiletBar.setProgress(Person.toilet);
+            indToiletInt.setText(String.valueOf(Person.toilet));
+            ProgressBar indShowerBar = getActivity().findViewById(R.id.indShowerBar);
+            TextView indShowerInt = getActivity().findViewById(R.id.indShowerInt);
+            indShowerBar.setProgress(Person.shower);
+            indShowerInt.setText(String.valueOf(Person.shower));
         }
 
         @Nullable
@@ -43,16 +71,22 @@ public class BgView extends View {
                 @Override
                 public void onClick(View v) {
                     Person.Drink();
-                    System.out.println("Drink: " + Person.drink);
-                    //TextView indD = view.findViewById(R.id.indDrink);
-                    //indD.setText(Person.drink);
-                    Toast.makeText(getActivity(), "Drink", Toast.LENGTH_SHORT).show();
+                    ProgressBar indDrinkBar = getActivity().findViewById(R.id.indDrinkBar);
+                    TextView indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
+                    indDrinkBar.setProgress(Person.drink);
+                    indDrinkInt.setText(String.valueOf(Person.drink));
                 }
             });
+
+
             button_eat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Eat", Toast.LENGTH_SHORT).show();
+                    Person.Eat();
+                    ProgressBar indEatBar = getActivity().findViewById(R.id.indEatBar);
+                    TextView indEatInt = getActivity().findViewById(R.id.indEatInt);
+                    indEatBar.setProgress(Person.eat);
+                    indEatInt.setText(String.valueOf(Person.eat));
                 }
             });
             return view;
@@ -73,13 +107,25 @@ public class BgView extends View {
             button_sleep.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Sleep", Toast.LENGTH_SHORT).show();
+                    Person.Sleep();
+                    ProgressBar indSleepBar = getActivity().findViewById(R.id.indSleepBar);
+                    TextView indSleepInt = getActivity().findViewById(R.id.indSleepInt);
+                    indSleepBar.setProgress(Person.sleep);
+                    indSleepInt.setText(String.valueOf(Person.sleep));
                 }
             });
             button_rest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Rest", Toast.LENGTH_SHORT).show();
+                    Person.Rest();
+                    ProgressBar indSleepBar = getActivity().findViewById(R.id.indSleepBar);
+                    TextView indSleepInt = getActivity().findViewById(R.id.indSleepInt);
+                    indSleepBar.setProgress(Person.sleep);
+                    indSleepInt.setText(String.valueOf(Person.sleep));
+                    ProgressBar indBoredBar = getActivity().findViewById(R.id.indBoredBar);
+                    TextView indBoredInt = getActivity().findViewById(R.id.indBoredInt);
+                    indBoredBar.setProgress(Person.bored);
+                    indBoredInt.setText(String.valueOf(Person.bored));
                 }
             });
             return view;
@@ -99,17 +145,23 @@ public class BgView extends View {
             button_fun.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Fun", Toast.LENGTH_SHORT).show();
+                    Person.Fun();
+                    ProgressBar indBoredBar = getActivity().findViewById(R.id.indBoredBar);
+                    TextView indBoredInt = getActivity().findViewById(R.id.indBoredInt);
+                    indBoredBar.setProgress(Person.bored);
+                    indBoredInt.setText(String.valueOf(Person.bored));
                 }
             });
             button_play.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     intentToMiniGame = new Intent(view.getContext(), MiniGame.class);
+                    Person.Play();
+                    ProgressBar indBoredBar = getActivity().findViewById(R.id.indBoredBar);
+                    TextView indBoredInt = getActivity().findViewById(R.id.indBoredInt);
+                    indBoredBar.setProgress(Person.bored);
+                    indBoredInt.setText(String.valueOf(Person.bored));
                     startActivity(intentToMiniGame);
-
-                    Toast.makeText(getActivity(), "Play", Toast.LENGTH_SHORT).show();
                 }
             });
             return view;
@@ -130,27 +182,24 @@ public class BgView extends View {
             button_toilet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Toilet", Toast.LENGTH_SHORT).show();
+                    Person.GoToToilet();
+                    ProgressBar indToiletBar = getActivity().findViewById(R.id.indToiletBar);
+                    TextView indToiletInt = getActivity().findViewById(R.id.indToiletInt);
+                    indToiletBar.setProgress(Person.toilet);
+                    indToiletInt.setText(String.valueOf(Person.toilet));
                 }
             });
             button_bath.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Bath", Toast.LENGTH_SHORT).show();
+                    Person.GoShower();
+                    ProgressBar indShowerBar = getActivity().findViewById(R.id.indShowerBar);
+                    TextView indShowerInt = getActivity().findViewById(R.id.indShowerInt);
+                    indShowerBar.setProgress(Person.shower);
+                    indShowerInt.setText(String.valueOf(Person.shower));
                 }
             });
             return view;
         }
     }
-
-    public static class Indicators extends Fragment {
-        @Nullable
-        @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.indicators, container, false);
-            return super.onCreateView(inflater, container, savedInstanceState);
-        }
-    }
-
-
 }

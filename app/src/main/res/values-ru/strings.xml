@@ -29,16 +29,27 @@
     <string name="doPlay">Играть</string>
     <string name="doToilet">Сходить"\n"в туалет</string>
     <string name="doBath">Помыться</string>
+    <string name="rools">Игра "Тамогочи", в которой надо ухаживать за игровым персонажем."\n""\n"
+        Персонаж имеет показатели: насышенности едой, водой, сном, скуки, необходимостью помыться.
+        Персонаж может: есть, пить, играть, отдыхать, спать, ходить в туалет, душ, умереть.
+        Еду можно получать в мини-игре типа Jamper.
+        Здоровье влияет на внешний вид персонажа.
+        Концом игры является достижение одного из показателей до критического (до 0 или 100 для необходимосит сходить в туалет, душ, скуки)
+</string>
+    <string name="start">Старт</string>
+    <string name="enterName">Введите своё имя</string>
 
 
-    
-<!--  Tabs name, button name.
 
-  steam for animation
-  translate
-  start activity
-  all methods work
-  mini-game
 
-  -->
+
+    <!--  Tabs name, button name.
+
+      steam for animation
+      translate
+      start activity
+      all methods work
+      mini-game
+
+      -->
 </resources>

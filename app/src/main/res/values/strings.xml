@@ -29,7 +29,15 @@
     <string name="doPlay">Play</string>
     <string name="doToilet">Toilet</string>
     <string name="doBath">Bath</string>
+    <string name="rools">The game "Tamagotchi", in which you need to take care of the game character."\n""\n"
 
+        The character has indicators: saturation with food, water, sleep, boredom, the need to wash.
+        The character can: eat, drink, play, relax, sleep, go to the toilet, shower, die.
+        Food can be obtained in a mini-game like Jumper. Health affects the appearance of the character.
+        The end of the game is the achievement of one of the indicators to the critical (up to 0 or 100 for the need to go to the toilet, shower, boredom)
+    </string>
+    <string name="start">Start</string>
+    <string name="enterName">Enter your name</string>
 
     <!--  Tabs name, button name.
 

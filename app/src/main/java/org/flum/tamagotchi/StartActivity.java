@@ -2,11 +2,14 @@ package org.flum.tamagotchi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,11 +21,13 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences2;
     public String IS_IT_FIRST = "SAVED_IS_IT_FIRST";
 
+    public static EditText enterName;
+
     Person person = new Person();
 
     public static boolean isItFirstStart;
     public Button startButton;
-    Intent intent;
+    public static Intent intent;
     Intent intent2;
 
     @Override
@@ -32,17 +37,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         startButton = findViewById(R.id.StartButton);
         startButton.setOnClickListener(this);
-
-
-
-
-//        if (isItFirstStart == false) {
-//            intent2 = new Intent(this, MainActivity.class);
-//            startActivity(intent2);
-//        }
-
-
-        System.out.println("OnCreate " + isItFirstStart);
+        enterName = findViewById(R.id.EnterNickName);
 
         Check();
 
@@ -67,8 +62,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = sharedPreferences2.edit();
         editor.putBoolean(IS_IT_FIRST, StartActivity.isItFirstStart);
         editor.commit();
-
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void loadData() {
@@ -76,8 +69,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         boolean savedIsItFirst = sharedPreferences2.getBoolean(IS_IT_FIRST, true);
 
         StartActivity.isItFirstStart = savedIsItFirst;
-
-        Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
     }
 
     public void Check() {
@@ -86,7 +77,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         if (isItFirstStart == true) {
             intent2 = new Intent(this, MainActivity.class);
             startActivity(intent2);
-            System.out.println("Check " + isItFirstStart);
         }
     }
 
@@ -94,6 +84,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         isItFirstStart = true;
         saveData();
         intent = new Intent(this, MainActivity.class);
+        intent.putExtra("enterName", enterName.getText().toString());
         startActivity(intent);
     }
 

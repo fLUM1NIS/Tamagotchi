@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tamagotchi.NoActionBar">
-        <activity android:name=".MiniGame"></activity>
-        <activity android:name=".StartActivity">
+        <activity android:name=".LoadActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MiniGame" />
+        <activity android:name=".StartActivity">
         </activity> <!-- android:theme="@style/Theme.Tamagotchi"> -->
         <!-- @style/Theme.AppCompat.Light.DarkActionBar"> -->
         <activity

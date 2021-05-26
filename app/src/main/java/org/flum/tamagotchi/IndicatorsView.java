@@ -5,15 +5,32 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+//import android.app.Fragment;
+
+import static org.flum.tamagotchi.Person.bored;
+import static org.flum.tamagotchi.Person.drink;
+import static org.flum.tamagotchi.Person.eat;
+import static org.flum.tamagotchi.Person.health;
+import static org.flum.tamagotchi.Person.shower;
+import static org.flum.tamagotchi.Person.sleep;
+import static org.flum.tamagotchi.Person.toilet;
 
 public class IndicatorsView extends Fragment {
+
+
+    Bundle bundle = new Bundle();
+    Fragment fragment;
+    public View viewP;
+
+    public Timer timer = new Timer();
+
+    public boolean isTimerWork;
 
     TextView nickName;
     TextView indHealth, indDrink, indEat, indToilet, indBored, indSleep, indShower;
@@ -32,14 +49,12 @@ public class IndicatorsView extends Fragment {
 //        indInt.setText(String.valueOf(Person.));
 //        indBar.setProgress(Person.);
 
-
         nickName = view.findViewById(R.id.nickName);
-        nickName.setText("YoUr_NiCk");
-
+        nickName.setText(StartActivity.enterName.getText().toString());
 
         indHealth = view.findViewById(R.id.indHealth);
         indHealthInt = view.findViewById(R.id.indHealthInt);
-        indHealthBar = view.findViewById(R.id.IndHealthBar);
+        indHealthBar = view.findViewById(R.id.indHealthBar);
         indHealth.setText(R.string.upHealth);
         indHealthInt.setText(String.valueOf(Person.health));
         indHealthBar.setProgress(Person.health);
@@ -90,154 +105,95 @@ public class IndicatorsView extends Fragment {
         //return new test(getContext());
     }
 
+    public void UpdateIndicators() {
+        nickName = viewP.findViewById(R.id.nickName);
+        nickName.setText(StartActivity.enterName.getText().toString());
 
-    class Timer extends CountDownTimer  {
+        indHealth = viewP.findViewById(R.id.indHealth);
+        indHealthInt = viewP.findViewById(R.id.indHealthInt);
+        indHealthBar = viewP.findViewById(R.id.indHealthBar);
+        indHealth.setText(R.string.upHealth);
+        indHealthInt.setText(String.valueOf(Person.health));
+        indHealthBar.setProgress(Person.health);
 
-        public Timer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
+        indDrink = viewP.findViewById(R.id.indDrink);
+        indDrinkInt = viewP.findViewById(R.id.indDrinkInt);
+        indDrinkBar = viewP.findViewById(R.id.indDrinkBar);
+        indDrink.setText(R.string.upDrink);
+        indDrinkInt.setText(String.valueOf(Person.drink));
+        indDrinkBar.setProgress(Person.drink);
 
-        public Timer () {
-            super(Integer.MAX_VALUE, 10000);
+        indEat = viewP.findViewById(R.id.indEat);
+        indEatInt = viewP.findViewById(R.id.indEatInt);
+        indEatBar = viewP.findViewById(R.id.indEatBar);
+        indEat.setText(R.string.upEat);
+        indEatInt.setText(String.valueOf(Person.eat));
+        indEatBar.setProgress(Person.eat);
+
+        indToilet = viewP.findViewById(R.id.indToilet);
+        indToiletInt = viewP.findViewById(R.id.indToiletInt);
+        indToiletBar = viewP.findViewById(R.id.indToiletBar);
+        indToilet.setText(R.string.upToilet);
+        indToiletInt.setText(String.valueOf(Person.toilet));
+        indToiletBar.setProgress(Person.toilet);
+
+        indBored = viewP.findViewById(R.id.indBored);
+        indBoredInt = viewP.findViewById(R.id.indBoredInt);
+        indBoredBar = viewP.findViewById(R.id.indBoredBar);
+        indBored.setText(R.string.upBored);
+        indBoredInt.setText(String.valueOf(Person.bored));
+        indBoredBar.setProgress(Person.bored);
+
+        indSleep = viewP.findViewById(R.id.indSleep);
+        indSleepInt = viewP.findViewById(R.id.indSleepInt);
+        indSleepBar = viewP.findViewById(R.id.indSleepBar);
+        indSleep.setText(R.string.upSleep);
+        indSleepInt.setText(String.valueOf(Person.sleep));
+        indSleepBar.setProgress(Person.sleep);
+
+        indShower = viewP.findViewById(R.id.indShower);
+        indShowerInt = viewP.findViewById(R.id.indShowerInt);
+        indShowerBar = viewP.findViewById(R.id.indShowerBar);
+        indShower.setText(R.string.upShower);
+        indShowerInt.setText(String.valueOf(Person.shower));
+        indShowerBar.setProgress(Person.shower);
+
+        System.out.println("Update Ind");
+    }
+
+    class  Timer extends CountDownTimer {
+
+        public Timer() {
+            super(Long.MAX_VALUE, 420000); //420000
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
+            drink--;
+            eat--;
+            toilet--;
+            bored --;
+            sleep --;
+            shower--;
 
+//            ProgressBar indHealthBar = viewP.findViewById(R.id.indHealthBar); // getActivity().findViewById(R.id.indHealthBar);
 
+ //           TextView indHealthInt = getActivity().findViewById(R.id.indHealthInt);
 
+            if (((health * drink * eat * toilet * bored * sleep * shower) / 7) > 60) {
+                health ++;
+            }
+            else {
+                health --;
+            }
+//            indHealthBar.setProgress(health);
+//            indHealthInt.setText(String.valueOf(health));
+            System.out.println("Timer worked");
         }
 
         @Override
         public void onFinish() {
 
         }
-    }
-
-    public TextView getIndHealth() {
-        return indHealth;
-    }
-    public void setIndHealth(TextView indHealth) {
-        this.indHealth = indHealth;
-    }
-    public TextView getIndDrink() {
-        return indDrink;
-    }
-    public void setIndDrink(TextView indDrink) {
-        this.indDrink = indDrink;
-    }
-    public TextView getIndEat() {
-        return indEat;
-    }
-    public void setIndEat(TextView indEat) {
-        this.indEat = indEat;
-    }
-    public TextView getIndToilet() {
-        return indToilet;
-    }
-    public void setIndToilet(TextView indToilet) {
-        this.indToilet = indToilet;
-    }
-    public TextView getIndBored() {
-        return indBored;
-    }
-    public void setIndBored(TextView indBored) {
-        this.indBored = indBored;
-    }
-    public TextView getIndSleep() {
-        return indSleep;
-    }
-    public void setIndSleep(TextView indSleep) {
-        this.indSleep = indSleep;
-    }
-    public TextView getIndShower() {
-        return indShower;
-    }
-    public void setIndShower(TextView indShower) {
-        this.indShower = indShower;
-    }
-    public ProgressBar getIndHealthBar() {
-        return indHealthBar;
-    }
-    public void setIndHealthBar(ProgressBar indHealthBar) {
-        this.indHealthBar = indHealthBar;
-    }
-    public ProgressBar getIndDrinkBar() {
-        return indDrinkBar;
-    }
-    public void setIndDrinkBar(ProgressBar indDrinkBar) {
-        this.indDrinkBar = indDrinkBar;
-    }
-    public ProgressBar getIndEatBar() {
-        return indEatBar;
-    }
-    public void setIndEatBar(ProgressBar indEatBar) {
-        this.indEatBar = indEatBar;
-    }
-    public ProgressBar getIndToiletBar() {
-        return indToiletBar;
-    }
-    public void setIndToiletBar(ProgressBar indToiletBar) {
-        this.indToiletBar = indToiletBar;
-    }
-    public ProgressBar getIndBoredBar() {
-        return indBoredBar;
-    }
-    public void setIndBoredBar(ProgressBar indBoredBar) {
-        this.indBoredBar = indBoredBar;
-    }
-    public ProgressBar getIndSleepBar() {
-        return indSleepBar;
-    }
-    public void setIndSleepBar(ProgressBar indSleepBar) {
-        this.indSleepBar = indSleepBar;
-    }
-    public ProgressBar getIndShowerBar() {
-        return indShowerBar;
-    }
-    public void setIndShowerBar(ProgressBar indShowerBar) {
-        this.indShowerBar = indShowerBar;
-    }
-    public TextView getIndHealthInt() {
-        return indHealthInt;
-    }
-    public void setIndHealthInt(TextView indHealthInt) {
-        this.indHealthInt = indHealthInt;
-    }
-    public TextView getIndDrinkInt() {
-        return indDrinkInt;
-    }
-    public void setIndDrinkInt(TextView indDrinkInt) {
-        this.indDrinkInt = indDrinkInt;
-    }
-    public TextView getIndEatInt() {
-        return indEatInt;
-    }
-    public void setIndEatInt(TextView indEatInt) {
-        this.indEatInt = indEatInt;
-    }
-    public TextView getIndToiletInt() {
-        return indToiletInt;
-    }
-    public void setIndToiletInt(TextView indToiletInt) {
-        this.indToiletInt = indToiletInt;
-    }
-    public TextView getIndBoredInt() {
-        return indBoredInt;
-    }
-    public void setIndBoredInt(TextView indBoredInt) {
-        this.indBoredInt = indBoredInt;
-    }
-    public TextView getIndSleepInt() {
-        return indSleepInt;
-    }
-    public void setIndSleepInt(TextView indSleepInt) {
-        this.indSleepInt = indSleepInt;
-    }
-    public TextView getIndShowerInt() {
-        return indShowerInt;
-    }
-    public void setIndShowerInt(TextView indShowerInt) {
-        this.indShowerInt = indShowerInt;
     }
 }

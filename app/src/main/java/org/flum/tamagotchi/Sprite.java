@@ -4,27 +4,28 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sprite {
+public class Sprite{
 
-    private Bitmap bitmap;
-    private List<Rect> frames;
-    private int frameWidth;
-    private int frameHeight;
-    private int currentFrame;
-    private double frameTime;
-    private double timeForCurrentFrame;
+    private static Bitmap bitmap;
+    private static List<Rect> frames;
+    private static int frameWidth;
+    private static int frameHeight;
+    private static int currentFrame;
+    private static double frameTime;
+    private static double timeForCurrentFrame;
 
-    private double x;
-    private double y;
+    private static double x;
+    private static double y;
 
-    private double velocityX;
-    private double velocityY;
+    private static double velocityX;
+    private static double velocityY;
 
-    private int padding;
+    private static int padding;
 
     public Sprite(double x, double y, double velocityX, double velocityY,  Rect initialFrame, Bitmap bitmap){
 
@@ -48,7 +49,7 @@ public class Sprite {
         frames.add(frame);
     }
 
-    public void update (int ms) {
+    public static void update (int ms) {
 
         timeForCurrentFrame += ms;
 
@@ -64,91 +65,7 @@ public class Sprite {
 
     public void draw (Canvas canvas) {
         Paint p = new Paint();
-        Rect destination = new Rect((int)x, (int)y, (int)(x + frameWidth), (int)(y + frameHeight));
-        canvas.drawBitmap(bitmap, frames.get(currentFrame), destination,  p);
+        Rect destination = new Rect((int) x, (int) y, (int) (x + frameWidth), (int) (y + frameHeight));
+        canvas.drawBitmap(bitmap, frames.get(currentFrame), destination, p);
     }
-
-    public Rect getBoundingBoxRect () {
-        return new Rect((int)x+padding, (int)y+padding, (int)(x + frameWidth - 2 *padding),
-                (int)(y + frameHeight - 2* padding));
-    }
-
-    public boolean intersect (Sprite s) {
-        return getBoundingBoxRect().intersect(s.getBoundingBoxRect());
-    }
-
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-    public List<Rect> getFrames() {
-        return frames;
-    }
-    public void setFrames(List<Rect> frames) {
-        this.frames = frames;
-    }
-    public int getFrameWidth() {
-        return frameWidth;
-    }
-    public void setFrameWidth(int frameWidth) {
-        this.frameWidth = frameWidth;
-    }
-    public int getFrameHeight() {
-        return frameHeight;
-    }
-    public void setFrameHeight(int frameHeight) {
-        this.frameHeight = frameHeight;
-    }
-    public int getCurrentFrame() {
-        return currentFrame;
-    }
-    public void setCurrentFrame(int currentFrame) {
-        this.currentFrame = currentFrame;
-    }
-    public double getFrameTime() {
-        return frameTime;
-    }
-    public void setFrameTime(double frameTime) {
-        this.frameTime = frameTime;
-    }
-    public double getTimeForCurrentFrame() {
-        return timeForCurrentFrame;
-    }
-    public void setTimeForCurrentFrame(double timeForCurrentFrame) {
-        this.timeForCurrentFrame = timeForCurrentFrame;
-    }
-    public double getX() {
-        return x;
-    }
-    public void setX(double x) {
-        this.x = x;
-    }
-    public double getY() {
-        return y;
-    }
-    public void setY(double y) {
-        this.y = y;
-    }
-    public double getVelocityX() {
-        return velocityX;
-    }
-    public void setVelocityX(double velocityX) {
-        this.velocityX = velocityX;
-    }
-    public double getVelocityY() {
-        return velocityY;
-    }
-    public void setVelocityY(double velocityY) {
-        this.velocityY = velocityY;
-    }
-    public int getPadding() {
-        return padding;
-    }
-    public void setPadding(int padding) {
-        this.padding = padding;
-    }
-
-
 }
