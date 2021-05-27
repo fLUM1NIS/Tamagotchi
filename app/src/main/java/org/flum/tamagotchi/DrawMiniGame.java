@@ -35,42 +35,33 @@ Activity activity2 = (Activity) getContext();
     public DrawMiniGame(Context context) {
         super(context);
 
-
-
         Bitmap bPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.tamagotchi_mini);
         wP = bPlayer.getWidth();
         hP = bPlayer.getHeight();
-
         Rect firstFrameP = new Rect(0, 0, wP, hP);
         player = new GameSprite(216*2 + 16, 1500, 0, 0, firstFrameP, bPlayer);
         player.addFrame(new Rect(wP, 0 * hP, wP + wP, hP + hP));
-
 
         Bitmap bMeteor = BitmapFactory.decodeResource(getResources(), R.drawable.meteor);
         wM = bPlayer.getWidth();
         hM = bPlayer.getHeight();
         Rect firstFrameM = new Rect(0, 0, wM, hM);
-        meteor = new GameSprite(216 * 3 + 16, 200 + ((int) (Math.random()*1000)), 0, 300, firstFrameM, bMeteor);
+        meteor = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 200 + ((int) (Math.random()*1000)), 0, 300, firstFrameM, bMeteor);
         meteor.addFrame(new Rect(wM, hM, wM*2, hM*2));
 
         Bitmap bMeat = BitmapFactory.decodeResource(getResources(), R.drawable.meat);
         wMe = bMeat.getWidth();
         hMe = bMeat.getHeight();
         Rect firstFrameMe = new Rect(0, 0, wMe, hMe);
-        meat = new GameSprite(216 * 2 + 16, 2800 + ((int) (Math.random()*1000)), 0, 300, firstFrameMe, bMeat);
+        meat = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 2800 + ((int) (Math.random()*2000)), 0, 300, firstFrameMe, bMeat);
         meat.addFrame(new Rect(wMe, hMe, wMe*2, hMe*2));
 
         Bitmap bWater = BitmapFactory.decodeResource(getResources(), R.drawable.water);
         wW = bWater.getWidth();
         hW = bWater.getHeight();
         Rect firstFrameW = new Rect(0,0,wW,hW);
-        water = new GameSprite(216 + 16, 1400 + ((int) (Math.random()*1000)), 0, 300, firstFrameW, bWater);
+        water = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 1400 + ((int) (Math.random()*1000)), 0, 300, firstFrameW, bWater);
         water.addFrame(new Rect(wW, hW, wW*2, hW*2));
-
-
-
-        //paddingLeft = (int) (CW5 - wP) /2;
-
 
         Timer timer = new Timer();
         timer.start();
@@ -92,9 +83,6 @@ Activity activity2 = (Activity) getContext();
         canvas.drawLine(CW5 * 4, 0, CW5 * 4, canvasH, paint);
         canvas.drawLine(canvasW - 10, 0, canvasW - 10, canvasH, paint);
         canvas.drawLine(10, canvasH - CW5, canvasW - 10, canvasH - CW5, paint);
-
-
-        //canvas.drawARGB(250, 127, 199, 255); // заливаем цветом
 
         p.setAntiAlias(true);
         p.setTextSize(55.0f);
@@ -139,6 +127,7 @@ Activity activity2 = (Activity) getContext();
 
         if (meteor.intersect(player)) {
             if (points == 0) {
+                points = 3;
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 activity2.startActivity(intent);
             }
@@ -158,10 +147,12 @@ Activity activity2 = (Activity) getContext();
         invalidate();
     }
 
-    private final int timerInterval = 30;
+    private boolean isItStart = true;
+
+    private final int timerInterval = 20;
     private int viewWidth;
     private int viewHeight;
-    private int points = 3;
+    private int points = MainActivity.points;
     private GameSprite player;
     private GameSprite meteor;
     private GameSprite meat;
@@ -219,7 +210,7 @@ Activity activity2 = (Activity) getContext();
 
         @Override
         public void onTick(long millisUntilFinished) {
-            update();
+            if (isItStart) update();
         }
 
         @Override

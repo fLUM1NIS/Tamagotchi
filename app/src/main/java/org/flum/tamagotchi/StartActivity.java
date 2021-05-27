@@ -38,6 +38,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         startButton = findViewById(R.id.StartButton);
         startButton.setOnClickListener(this);
         enterName = findViewById(R.id.EnterNickName);
+        //MainActivity.nick = enterName.getText().toString();
 
         Check();
 

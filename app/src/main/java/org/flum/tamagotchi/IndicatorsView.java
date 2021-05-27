@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class IndicatorsView extends Fragment {
 
     public boolean isTimerWork;
 
+    EditText enterName;
     TextView nickName;
     TextView indHealth, indDrink, indEat, indToilet, indBored, indSleep, indShower;
     ProgressBar indHealthBar, indDrinkBar, indEatBar, indToiletBar, indBoredBar, indSleepBar, indShowerBar;
@@ -49,11 +51,11 @@ public class IndicatorsView extends Fragment {
 //        indInt.setText(String.valueOf(Person.));
 //        indBar.setProgress(Person.);
 
-        nickName = view.findViewById(R.id.nickName);
+        enterName = view.findViewById(R.id.EnterNickName);
+        nickName = getActivity().findViewById(R.id.nickName);
         //nickName.setText(StartActivity.enterName.getText().toString());
-        if (nickName == null) {
-            nickName.setText(MainActivity.nick);
-        }
+//        nickName.setText(MainActivity.nick);
+//        nickName.setText(enterName.getText().toString());
 
         indHealth = view.findViewById(R.id.indHealth);
         indHealthInt = view.findViewById(R.id.indHealthInt);

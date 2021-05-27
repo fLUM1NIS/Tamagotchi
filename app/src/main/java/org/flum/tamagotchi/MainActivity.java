@@ -2,6 +2,7 @@ package org.flum.tamagotchi;
 
 import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     IndicatorsView indicatorsView = new IndicatorsView();
     android.app.Fragment fragment = getFragmentManager().findFragmentById(R.id.indicators_view);
     FragmentManager fragmentManager = getSupportFragmentManager();
-    String nickName;
+    String ickName;
+    public static int points = 3;
 
     public String NAME_HEALTH = "SAVED_HEALTH";
     public String NAME_DRINK = "SAVED_DRINK";
@@ -111,13 +113,14 @@ public class MainActivity extends AppCompatActivity {
 //        indShowerInt.setText(String.valueOf(Person.shower));
 
         enterNick = findViewById(R.id.EnterNickName);
-        nick = enterNick.getText().toString();
+//        nick = enterNick.getText().toString();
+          nick =  StartActivity.intent.getStringExtra("enterName");
 
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Еды: " + Person.HMEat + "Воды: " + Person.HMWater, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
