@@ -35,10 +35,6 @@ public class Person {
      public static int health, drink, eat, toilet, bored, sleep, shower;
      public static int status; // 1 - good; 2 - normal; 3 - bad; 4 - awful; 5 - dead;
 
-
-//    public Person () { }
-
-
     public void Start() {
         //рандомизация начальных показателей
         double rds = Math.random() * 1;
@@ -126,7 +122,7 @@ public class Person {
     }
 
     public static void GoToToilet() {
-        toilet += (toilet - Math.random() * 60);
+        toilet += (toilet - Math.random() * 25 + 35);
         if (toilet > 100) toilet = toilet - (toilet - 100);
     }
 
@@ -181,6 +177,14 @@ public class Person {
 //            indHealthBar.setProgress(health);
 //            indHealthInt.setText(String.valueOf(health));
             System.out.println("Timer worked");
+
+            //DrawMiniGame drawMiniGame = new DrawMiniGame(fragment.getContext());
+            MainActivity mainActivity = new MainActivity();
+
+            System.out.println("-------------------------------------------------" +"\n" +
+                    "Points = " + MainActivity.points + "\n" +
+                    "isMiniGameStart = " + DrawMiniGame.isMiniGameStart + "\n" +
+                    "------------------------------------");
         }
 
         @Override

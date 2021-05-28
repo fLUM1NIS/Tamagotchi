@@ -25,7 +25,7 @@ public class DrawMiniGame extends View {
     public int paddingLeft;
     float canvasH, canvasW, CW5, MOC;
 
-    boolean isItStart;
+    public static boolean isMiniGameStart = true;
 
     public int wP;
     public int hP;
@@ -35,7 +35,6 @@ public class DrawMiniGame extends View {
     public int hMe;
     public int wW;
     public int hW;
-
 
     public DrawMiniGame(Context context) {
         super(context);
@@ -69,11 +68,12 @@ public class DrawMiniGame extends View {
         water = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, -1400 + (-((int) (Math.random()*1000))), 0, 300, firstFrameW, bWater);
         water.addFrame(new Rect(wW, hW, wW*2, hW*2));
 
-        isItStart = true;
+        isMiniGameStart = true;
 
         Timer timer = new Timer();
         timer.start();
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -136,6 +136,7 @@ public class DrawMiniGame extends View {
         if (meteor.intersect(player)) {
             if (points == 0) {
                 points = 3;
+                isMiniGameStart = false;
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 activity2.startActivity(intent);
             }
@@ -217,7 +218,7 @@ public class DrawMiniGame extends View {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            if (isItStart) update();
+            if (isMiniGameStart) update();
         }
 
         @Override

@@ -34,7 +34,7 @@
         The character has indicators: saturation with food, water, sleep, boredom, the need to wash.
         The character can: eat, drink, play, relax, sleep, go to the toilet, shower, die.
         Food can be obtained in a mini-game like Jumper. Health affects the appearance of the character.
-        The end of the game is the achievement of one of the indicators to the critical (up to 0 or 100 for the need to go to the toilet, shower, boredom)
+        The end of the game is the achievement of one of the indicators to the critical.
     </string>
     <string name="start">Start</string>
     <string name="enterName">Enter your name</string>
@@ -42,5 +42,6 @@
     <string name="noWater">You have not water</string>
     <string name="HMEat">Food:</string>
     <string name="HMWater">Water:</string>
+    <string name="miniGame">Mini-game</string>
 
 </resources>

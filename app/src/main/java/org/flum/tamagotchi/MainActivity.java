@@ -45,10 +45,6 @@ import static org.flum.tamagotchi.Person.toilet;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    //IndicatorsView indicatorsView = new IndicatorsView();
-    android.app.Fragment fragment = getFragmentManager().findFragmentById(R.id.indicators_view);
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    String ickName;
     public static int points = 3;
 
     public String NAME_HEALTH = "SAVED_HEALTH";
@@ -90,14 +86,23 @@ public class MainActivity extends AppCompatActivity {
           //nick =  StartActivity.intent.getStringExtra("enterName");
         nick = StartActivity.enterName.getText().toString();
 
+        DrawMiniGame.isMiniGameStart = false;
+        if (DrawMiniGame.isMiniGameStart = true) {
+            DrawMiniGame.isMiniGameStart = false;
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, R.string.HMEat + " " + person.HMEat + "      " + R.string.HMWater + " " + person.HMWater, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Еды:" + " " + person.HMEat + "      " + "Воды:" + " " + person.HMWater, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+
+//        Snackbar.make(view, String.valueOf(R.string.HMEat) + " " + person.HMEat + "      " + String.valueOf(R.string.HMWater) + " " + person.HMWater, Snackbar.LENGTH_LONG)
+
 
         person.timer.start();
         Log.d("Err", "Person timer started");
