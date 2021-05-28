@@ -40,22 +40,22 @@
         app:maxImageSize="40dp"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/optionsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:backgroundTint="@color/purple_500"
-        app:layout_anchor="@+id/view_pager"
-        app:layout_anchorGravity="start|bottom"
-        app:srcCompat="@drawable/options_icon" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/optionsButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:clickable="true"-->
+<!--        android:padding="10dp"-->
+<!--        android:paddingStart="10dp"-->
+<!--        android:paddingLeft="10dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        android:paddingEnd="10dp"-->
+<!--        android:paddingRight="10dp"-->
+<!--        android:paddingBottom="10dp"-->
+<!--        app:backgroundTint="@color/purple_500"-->
+<!--        app:layout_anchor="@+id/view_pager"-->
+<!--        app:layout_anchorGravity="start|bottom"-->
+<!--        app:srcCompat="@drawable/options_icon" />-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
