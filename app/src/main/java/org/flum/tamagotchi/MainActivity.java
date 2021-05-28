@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Еды: " + person.HMEat + "Воды: " + person.HMWater, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.HMEat + " " + person.HMEat + "      " + R.string.HMWater + " " + person.HMWater, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

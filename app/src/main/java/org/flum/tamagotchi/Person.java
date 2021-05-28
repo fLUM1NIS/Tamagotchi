@@ -29,8 +29,8 @@ public class Person {
     public Timer timer = new Timer();
 
 
-    public int HMWater;
-    public int HMEat;
+    public static int HMWater;
+    public static int HMEat;
 
      public static int health, drink, eat, toilet, bored, sleep, shower;
      public static int status; // 1 - good; 2 - normal; 3 - bad; 4 - awful; 5 - dead;

@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Objects;
 
 public class BgView extends View {
@@ -70,11 +72,18 @@ public class BgView extends View {
             button_drink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Person.Drink();
-                    ProgressBar indDrinkBar = getActivity().findViewById(R.id.indDrinkBar);
-                    TextView indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
-                    indDrinkBar.setProgress(Person.drink);
-                    indDrinkInt.setText(String.valueOf(Person.drink));
+                    if (Person.HMWater > 0) {
+                        Person.Drink();
+                        ProgressBar indDrinkBar = getActivity().findViewById(R.id.indDrinkBar);
+                        TextView indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
+                        indDrinkBar.setProgress(Person.drink);
+                        indDrinkInt.setText(String.valueOf(Person.drink));
+                        Person.HMWater--;
+                    }
+                    else {
+                        Snackbar.make(view, R.string.noWater, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
             });
 
@@ -82,11 +91,18 @@ public class BgView extends View {
             button_eat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Person.Eat();
-                    ProgressBar indEatBar = getActivity().findViewById(R.id.indEatBar);
-                    TextView indEatInt = getActivity().findViewById(R.id.indEatInt);
-                    indEatBar.setProgress(Person.eat);
-                    indEatInt.setText(String.valueOf(Person.eat));
+                    if (Person.HMEat > 1) {
+                        Person.Eat();
+                        ProgressBar indEatBar = getActivity().findViewById(R.id.indEatBar);
+                        TextView indEatInt = getActivity().findViewById(R.id.indEatInt);
+                        indEatBar.setProgress(Person.eat);
+                        indEatInt.setText(String.valueOf(Person.eat));
+                        Person.HMEat--;
+                    }
+                    else {
+                        Snackbar.make(view, R.string.noEat, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
             });
             return view;

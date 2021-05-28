@@ -38,18 +38,9 @@
 </string>
     <string name="start">Старт</string>
     <string name="enterName">Введите своё имя</string>
+    <string name="noEat">У вас недостаточно еды</string>
+    <string name="noWater">У вас недостаточно воды</string>
+    <string name="HMEat">Еды:</string>
+    <string name="HMWater">Воды:</string>
 
-
-
-
-
-    <!--  Tabs name, button name.
-
-      steam for animation
-      translate
-      start activity
-      all methods work
-      mini-game
-
-      -->
 </resources>
