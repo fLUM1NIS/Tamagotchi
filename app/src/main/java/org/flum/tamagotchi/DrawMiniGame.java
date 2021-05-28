@@ -14,22 +14,27 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 
+import static org.flum.tamagotchi.MainActivity.person;
+
 public class DrawMiniGame extends View {
 
     Activity activity = new Activity();
-Activity activity2 = (Activity) getContext();
+    Activity activity2 = (Activity) getContext();
+    MainActivity mainActivity = new MainActivity();
 
-    public static int paddingLeft;
+    public int paddingLeft;
     float canvasH, canvasW, CW5, MOC;
 
-    public static int wP;
-    public static int hP;
-    public static int wM;
-    public static int hM;
-    public static int wMe;
-    public static int hMe;
-    public static int wW;
-    public static int hW;
+    boolean isItStart;
+
+    public int wP;
+    public int hP;
+    public int wM;
+    public int hM;
+    public int wMe;
+    public int hMe;
+    public int wW;
+    public int hW;
 
 
     public DrawMiniGame(Context context) {
@@ -46,22 +51,25 @@ Activity activity2 = (Activity) getContext();
         wM = bPlayer.getWidth();
         hM = bPlayer.getHeight();
         Rect firstFrameM = new Rect(0, 0, wM, hM);
-        meteor = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 200 + ((int) (Math.random()*1000)), 0, 300, firstFrameM, bMeteor);
+        meteor = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, -200 + (-((int) (Math.random()*1000))), 0, 300, firstFrameM, bMeteor);
         meteor.addFrame(new Rect(wM, hM, wM*2, hM*2));
+        System.out.println("Meteor x =  " + meteor.getX() + "meteor Y =  " + meteor.getY());
 
         Bitmap bMeat = BitmapFactory.decodeResource(getResources(), R.drawable.meat);
         wMe = bMeat.getWidth();
         hMe = bMeat.getHeight();
         Rect firstFrameMe = new Rect(0, 0, wMe, hMe);
-        meat = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 2800 + ((int) (Math.random()*2000)), 0, 300, firstFrameMe, bMeat);
+        meat = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, -2800 + (-((int) (Math.random()*2000))), 0, 300, firstFrameMe, bMeat);
         meat.addFrame(new Rect(wMe, hMe, wMe*2, hMe*2));
 
         Bitmap bWater = BitmapFactory.decodeResource(getResources(), R.drawable.water);
         wW = bWater.getWidth();
         hW = bWater.getHeight();
         Rect firstFrameW = new Rect(0,0,wW,hW);
-        water = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, 1400 + ((int) (Math.random()*1000)), 0, 300, firstFrameW, bWater);
+        water = new GameSprite(216 * ((int) ((Math.random()*4)) + 1) + 16, -1400 + (-((int) (Math.random()*1000))), 0, 300, firstFrameW, bWater);
         water.addFrame(new Rect(wW, hW, wW*2, hW*2));
+
+        isItStart = true;
 
         Timer timer = new Timer();
         timer.start();
@@ -88,8 +96,8 @@ Activity activity2 = (Activity) getContext();
         p.setTextSize(55.0f);
         p.setColor(Color.WHITE);
         canvas.drawText("Жизни: " + points + "", viewWidth - 250, 70, p);
-        canvas.drawText("Еды: " + Person.HMEat, viewWidth - 650, 70, p);
-        canvas.drawText("Воды: " + Person.HMWater, viewWidth - 1050, 70, p);
+        canvas.drawText("Еды: " + person.HMEat, viewWidth - 650, 70, p);
+        canvas.drawText("Воды: " + person.HMWater, viewWidth - 1050, 70, p);
 
         canvasH = canvas.getHeight();
         canvasW = canvas.getWidth();
@@ -118,7 +126,7 @@ Activity activity2 = (Activity) getContext();
 
         if (meat.intersect(player)) {
             teleportMeat();
-            Person.HMEat ++;
+            person.HMEat ++;
         }
 
         if (meteor.getY() > (player.getY() + player.getFrameHeight())) {
@@ -141,15 +149,14 @@ Activity activity2 = (Activity) getContext();
 
         if (water.intersect(player)) {
             teleportWater();
-            Person.HMWater ++;
+            person.HMWater ++;
         }
 
         invalidate();
     }
 
-    private boolean isItStart = true;
 
-    private final int timerInterval = 20;
+    private final int timerInterval = 30;
     private int viewWidth;
     private int viewHeight;
     private int points = MainActivity.points;

@@ -31,7 +31,7 @@ public class BgView extends View {
     public static class View1 extends Fragment {
 
         public void updateInd() {
-            ProgressBar indDrinkBar = Objects.requireNonNull(getActivity()).findViewById(R.id.indDrinkBar);
+            ProgressBar indDrinkBar = getActivity().findViewById(R.id.indDrinkBar);
             TextView indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
             indDrinkBar.setProgress(Person.drink);
             indDrinkInt.setText(String.valueOf(Person.drink));

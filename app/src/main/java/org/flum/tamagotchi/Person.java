@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class Person extends AppCompatActivity {
+public class Person {
 
 //    MainActivity mainActivity = new MainActivity();
 
@@ -25,31 +26,17 @@ public class Person extends AppCompatActivity {
     public static Activity activity = new Activity();
     public static Fragment fragment = new Fragment();
 
-    Timer timer = new Timer();
+    public Timer timer = new Timer();
 
 
-    public static int HMWater;
-    public static int HMEat;
+    public int HMWater;
+    public int HMEat;
 
      public static int health, drink, eat, toilet, bored, sleep, shower;
      public static int status; // 1 - good; 2 - normal; 3 - bad; 4 - awful; 5 - dead;
 
-     TextView indicators;
 
-
-    public static int getStatus() {
-        return status;
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Start();
-
-        timer.start();
-
-    }
-
+//    public Person () { }
 
 
     public void Start() {
@@ -157,7 +144,7 @@ public class Person extends AppCompatActivity {
     }
 
     public static void Dead() {
-        Intent intent = new Intent (mainActivity, StartActivity.class);
+        Intent intent = new Intent (mainActivity, LoadActivity.class);
         activity.startActivity(intent);
     }
 
@@ -166,22 +153,34 @@ public class Person extends AppCompatActivity {
     }
 
 
+    class  Timer extends CountDownTimer {
 
-
-    class Timer extends CountDownTimer  {
-
-        public Timer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        public Timer () {
-            super(Integer.MAX_VALUE, 60);
+        public Timer() {
+            super(Long.MAX_VALUE, 420000); //420000
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
-            CheckDead();
-            indicatorsView.UpdateIndicators();
+            drink--;
+            eat--;
+            toilet--;
+            bored --;
+            sleep --;
+            shower--;
+
+//            ProgressBar indHealthBar = viewP.findViewById(R.id.indHealthBar); // getActivity().findViewById(R.id.indHealthBar);
+
+            //           TextView indHealthInt = getActivity().findViewById(R.id.indHealthInt);
+
+            if (((health * drink * eat * toilet * bored * sleep * shower) / 7) > 60) {
+                health ++;
+            }
+            else {
+                health --;
+            }
+//            indHealthBar.setProgress(health);
+//            indHealthInt.setText(String.valueOf(health));
+            System.out.println("Timer worked");
         }
 
         @Override
@@ -189,6 +188,30 @@ public class Person extends AppCompatActivity {
 
         }
     }
+
+
+
+//    class Timer extends CountDownTimer  {
+//
+//        public Timer(long millisInFuture, long countDownInterval) {
+//            super(millisInFuture, countDownInterval);
+//        }
+//
+//        public Timer () {
+//            super(Integer.MAX_VALUE, 60);
+//        }
+//
+//        @Override
+//        public void onTick(long millisUntilFinished) {
+//            CheckDead();
+//            indicatorsView.UpdateIndicators();
+//        }
+//
+//        @Override
+//        public void onFinish() {
+//
+//        }
+//    }
 
     public int getHealth() {
         return health;

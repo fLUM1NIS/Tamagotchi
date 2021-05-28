@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ import static org.flum.tamagotchi.Person.toilet;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    IndicatorsView indicatorsView = new IndicatorsView();
+    //IndicatorsView indicatorsView = new IndicatorsView();
     android.app.Fragment fragment = getFragmentManager().findFragmentById(R.id.indicators_view);
     FragmentManager fragmentManager = getSupportFragmentManager();
     String ickName;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText enterNick;
 
-    Person person = new Person();
+    public static Person person = new Person();
     public TextView indicators;
     EditText editText;
     View view;
@@ -84,46 +85,22 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-//        ProgressBar indDrinkBar = indicatorsView.getActivity().findViewById(R.id.indDrinkBar); //  fragment.getView().findViewById(R.id.indDrinkBar);
-//        TextView indDrinkInt = fragment.getView().findViewById(R.id.indDrinkInt);
-//        indDrinkBar.setProgress(Person.drink);
-//        indDrinkInt.setText(String.valueOf(Person.drink));
-//        ProgressBar indEatBar = findViewById(R.id.indEatBar);
-//        TextView indEatInt = findViewById(R.id.indEatInt);
-//        indEatBar.setProgress(Person.eat);
-//        indEatInt.setText(String.valueOf(Person.eat));
-//        ProgressBar indSleepBar = findViewById(R.id.indSleepBar);
-//        TextView indSleepInt = findViewById(R.id.indSleepInt);
-//        indSleepBar.setProgress(Person.sleep);
-//        indSleepInt.setText(String.valueOf(Person.sleep));
-//        indSleepBar.setProgress(Person.sleep);
-//        indSleepInt.setText(String.valueOf(Person.sleep));
-//        ProgressBar indBoredBar = findViewById(R.id.indBoredBar);
-//        TextView indBoredInt = findViewById(R.id.indBoredInt);
-//        indBoredBar.setProgress(Person.bored);
-//        indBoredInt.setText(String.valueOf(Person.bored));
-//        ProgressBar indToiletBar = findViewById(R.id.indToiletBar);
-//        TextView indToiletInt = findViewById(R.id.indToiletInt);
-//        indToiletBar.setProgress(Person.toilet);
-//        indToiletInt.setText(String.valueOf(Person.toilet));
-//        ProgressBar indShowerBar = findViewById(R.id.indShowerBar);
-//        TextView indShowerInt = findViewById(R.id.indShowerInt);
-//        indShowerBar.setProgress(Person.shower);
-//        indShowerInt.setText(String.valueOf(Person.shower));
-
         enterNick = findViewById(R.id.EnterNickName);
 //        nick = enterNick.getText().toString();
-          nick =  StartActivity.intent.getStringExtra("enterName");
+          //nick =  StartActivity.intent.getStringExtra("enterName");
+        nick = StartActivity.enterName.getText().toString();
 
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Еды: " + Person.HMEat + "Воды: " + Person.HMWater, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Еды: " + person.HMEat + "Воды: " + person.HMWater, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+        person.timer.start();
+        Log.d("Err", "Person timer started");
 
         //CheckStatus();
 
@@ -146,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void CheckStatus() {
-        if (((health * drink * eat * toilet * bored * sleep * shower) / 7) > 1 && ((health * drink * eat * toilet * bored * sleep * shower) / 7) < 100) {
-            status = 2;
-        }
-        status =2;
-    }
+//    public void CheckStatus() {
+//        if (((health * drink * eat * toilet * bored * sleep * shower) / 7) > 1 && ((health * drink * eat * toilet * bored * sleep * shower) / 7) < 100) {
+//            status = 2;
+//        }
+//        status =2;
+//    }
 
     void saveData() {
         sharedPreferences = getPreferences(MODE_PRIVATE);
@@ -163,9 +140,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt(NAME_BORED, bored);
         editor.putInt(NAME_SLEEP, sleep);
         editor.putInt(NAME_SHOWER, shower);
-        editor.putInt(NAME_HM_WATER, Person.HMWater);
-        editor.putInt(NAME_HM_EAT, Person.HMEat);
+        editor.putInt(NAME_HM_WATER, person.HMWater);
+        editor.putInt(NAME_HM_EAT, person.HMEat);
         editor.putString(NAME_NICK, nick);
+        //editor.putBoolean("isItFirstStart", StartActivity.isItFirstStart);
         editor.commit();
     }
 
@@ -180,8 +158,9 @@ public class MainActivity extends AppCompatActivity {
         int savedShower = sharedPreferences.getInt(NAME_SHOWER, -1);
         int savedHMWater = sharedPreferences.getInt(NAME_HM_WATER, 5);
         int savedHMEat = sharedPreferences.getInt(NAME_HM_EAT, 5);
+//        boolean savedIsItFirstStart = sharedPreferences.getBoolean("isItFirstStart", true);
 
-        String savedNick = sharedPreferences.getString(NAME_NICK, "");
+        String savedNick = sharedPreferences.getString(NAME_NICK, "NiCk_nAmE");
 
         health = savedHealth;
         drink = savedDrink;
@@ -190,9 +169,11 @@ public class MainActivity extends AppCompatActivity {
         bored = savedBored;
         sleep = savedSleep;
         shower = savedShower;
-        Person.HMWater = savedHMWater;
-        Person.HMEat = savedHMEat;
+        person.HMWater = savedHMWater;
+        person.HMEat = savedHMEat;
         nick = savedNick;
+        //StartActivity.isItFirstStart = savedIsItFirstStart;
+
     }
 
     public static class SectionsPagerAdapter extends FragmentPagerAdapter {

@@ -23,7 +23,7 @@ public class LoadActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), StartActivity.class);
                 startActivity(intent);
             }
-        }, 10000); //specify the number of milliseconds
+        }, 5000); //specify the number of milliseconds
 
 
     }

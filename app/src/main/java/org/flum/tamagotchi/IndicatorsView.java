@@ -2,6 +2,7 @@ package org.flum.tamagotchi;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 //import android.app.Fragment;
 
 import static org.flum.tamagotchi.Person.bored;
@@ -27,9 +29,9 @@ public class IndicatorsView extends Fragment {
 
     Bundle bundle = new Bundle();
     Fragment fragment;
-    public View viewP;
+//    public FragmentActivity viewP = getActivity();
 
-    public Timer timer = new Timer();
+    //public Timer timer = new Timer();
 
     public boolean isTimerWork;
 
@@ -51,10 +53,11 @@ public class IndicatorsView extends Fragment {
 //        indInt.setText(String.valueOf(Person.));
 //        indBar.setProgress(Person.);
 
-        enterName = view.findViewById(R.id.EnterNickName);
-        nickName = getActivity().findViewById(R.id.nickName);
-        //nickName.setText(StartActivity.enterName.getText().toString());
-//        nickName.setText(MainActivity.nick);
+//        enterName = view.findViewById(R.id.EnterNickName);  //.findViewById(R.id.EnterNickName);
+        nickName = view.findViewById(R.id.nickName);
+        nickName.setText(StartActivity.enterName.getText().toString());
+        //nickName.setText(MainActivity.nick);
+        //nickName.setText(StartActivity.intent.getStringExtra("enterName"));
 //        nickName.setText(enterName.getText().toString());
 
         indHealth = view.findViewById(R.id.indHealth);
@@ -112,95 +115,76 @@ public class IndicatorsView extends Fragment {
         //return new test(getContext());
     }
 
+    @Override
+    public void onResume() {
+        UpdateIndicators();
+        super.onResume();
+    }
+
     public void UpdateIndicators() {
-        nickName = viewP.findViewById(R.id.nickName);
+        nickName = getActivity().findViewById(R.id.nickName);
+        if (StartActivity.isItFirstStart == true) {
+            Log.d("what", "(IndicatorsView) enterNick = " + StartActivity.enterName.getText().toString());
+            nickName.setText(StartActivity.enterName.getText().toString());
+        }
+        else {
+            nickName.setText(MainActivity.nick);
+        }
+
+
+        Log.d("what", "(IndicatorsView) enterNick = " + StartActivity.enterName.getText().toString());
         nickName.setText(StartActivity.enterName.getText().toString());
 
-        indHealth = viewP.findViewById(R.id.indHealth);
-        indHealthInt = viewP.findViewById(R.id.indHealthInt);
-        indHealthBar = viewP.findViewById(R.id.indHealthBar);
+        indHealth = getActivity().findViewById(R.id.indHealth);
+        //indHealth = viewP.findViewById(R.id.indHealth);
+        indHealthInt = getActivity().findViewById(R.id.indHealthInt);
+        indHealthBar = getActivity().findViewById(R.id.indHealthBar);
         indHealth.setText(R.string.upHealth);
         indHealthInt.setText(String.valueOf(Person.health));
         indHealthBar.setProgress(Person.health);
 
-        indDrink = viewP.findViewById(R.id.indDrink);
-        indDrinkInt = viewP.findViewById(R.id.indDrinkInt);
-        indDrinkBar = viewP.findViewById(R.id.indDrinkBar);
+        indDrink = getActivity().findViewById(R.id.indDrink);
+        indDrinkInt = getActivity().findViewById(R.id.indDrinkInt);
+        indDrinkBar = getActivity().findViewById(R.id.indDrinkBar);
         indDrink.setText(R.string.upDrink);
         indDrinkInt.setText(String.valueOf(Person.drink));
         indDrinkBar.setProgress(Person.drink);
 
-        indEat = viewP.findViewById(R.id.indEat);
-        indEatInt = viewP.findViewById(R.id.indEatInt);
-        indEatBar = viewP.findViewById(R.id.indEatBar);
+        indEat = getActivity().findViewById(R.id.indEat);
+        indEatInt = getActivity().findViewById(R.id.indEatInt);
+        indEatBar = getActivity().findViewById(R.id.indEatBar);
         indEat.setText(R.string.upEat);
         indEatInt.setText(String.valueOf(Person.eat));
         indEatBar.setProgress(Person.eat);
 
-        indToilet = viewP.findViewById(R.id.indToilet);
-        indToiletInt = viewP.findViewById(R.id.indToiletInt);
-        indToiletBar = viewP.findViewById(R.id.indToiletBar);
+        indToilet = getActivity().findViewById(R.id.indToilet);
+        indToiletInt = getActivity().findViewById(R.id.indToiletInt);
+        indToiletBar = getActivity().findViewById(R.id.indToiletBar);
         indToilet.setText(R.string.upToilet);
         indToiletInt.setText(String.valueOf(Person.toilet));
         indToiletBar.setProgress(Person.toilet);
 
-        indBored = viewP.findViewById(R.id.indBored);
-        indBoredInt = viewP.findViewById(R.id.indBoredInt);
-        indBoredBar = viewP.findViewById(R.id.indBoredBar);
+        indBored = getActivity().findViewById(R.id.indBored);
+        indBoredInt = getActivity().findViewById(R.id.indBoredInt);
+        indBoredBar = getActivity().findViewById(R.id.indBoredBar);
         indBored.setText(R.string.upBored);
         indBoredInt.setText(String.valueOf(Person.bored));
         indBoredBar.setProgress(Person.bored);
 
-        indSleep = viewP.findViewById(R.id.indSleep);
-        indSleepInt = viewP.findViewById(R.id.indSleepInt);
-        indSleepBar = viewP.findViewById(R.id.indSleepBar);
+        indSleep = getActivity().findViewById(R.id.indSleep);
+        indSleepInt = getActivity().findViewById(R.id.indSleepInt);
+        indSleepBar = getActivity().findViewById(R.id.indSleepBar);
         indSleep.setText(R.string.upSleep);
         indSleepInt.setText(String.valueOf(Person.sleep));
         indSleepBar.setProgress(Person.sleep);
 
-        indShower = viewP.findViewById(R.id.indShower);
-        indShowerInt = viewP.findViewById(R.id.indShowerInt);
-        indShowerBar = viewP.findViewById(R.id.indShowerBar);
+        indShower = getActivity().findViewById(R.id.indShower);
+        indShowerInt = getActivity().findViewById(R.id.indShowerInt);
+        indShowerBar = getActivity().findViewById(R.id.indShowerBar);
         indShower.setText(R.string.upShower);
         indShowerInt.setText(String.valueOf(Person.shower));
         indShowerBar.setProgress(Person.shower);
 
         System.out.println("Update Ind");
-    }
-
-    class  Timer extends CountDownTimer {
-
-        public Timer() {
-            super(Long.MAX_VALUE, 420000); //420000
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            drink--;
-            eat--;
-            toilet--;
-            bored --;
-            sleep --;
-            shower--;
-
-//            ProgressBar indHealthBar = viewP.findViewById(R.id.indHealthBar); // getActivity().findViewById(R.id.indHealthBar);
-
- //           TextView indHealthInt = getActivity().findViewById(R.id.indHealthInt);
-
-            if (((health * drink * eat * toilet * bored * sleep * shower) / 7) > 60) {
-                health ++;
-            }
-            else {
-                health --;
-            }
-//            indHealthBar.setProgress(health);
-//            indHealthInt.setText(String.valueOf(health));
-            System.out.println("Timer worked");
-        }
-
-        @Override
-        public void onFinish() {
-
-        }
     }
 }
